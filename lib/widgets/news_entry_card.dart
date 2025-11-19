@@ -33,7 +33,7 @@ class NewsEntryCard extends StatelessWidget {
                 ClipRRect(
                   borderRadius: BorderRadius.circular(6),
                   child: Image.network(
-                    'http://localhost:8000/proxy-image/?url=${Uri.encodeComponent(news.thumbnail)}',
+                    'http://localhost:8000/proxy-image/?url=${Uri.encodeComponent(news.thumbnail ?? '')}',
                     height: 150,
                     width: double.infinity,
                     fit: BoxFit.cover,
@@ -47,8 +47,9 @@ class NewsEntryCard extends StatelessWidget {
                 const SizedBox(height: 8),
 
                 // Title
+                // Title
                 Text(
-                  news.title,
+                  news.title ?? 'Tidak Ada Judul',
                   style: const TextStyle(
                     fontSize: 18.0,
                     fontWeight: FontWeight.bold,
@@ -76,8 +77,8 @@ class NewsEntryCard extends StatelessWidget {
                   const Text(
                     'Featured',
                     style: TextStyle(
-                      color: Colors.amber,
-                      fontWeight: FontWeight.bold
+                        color: Colors.amber,
+                        fontWeight: FontWeight.bold
                     ),
                   ),
               ],

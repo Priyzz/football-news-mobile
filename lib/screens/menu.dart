@@ -1,19 +1,26 @@
 import 'package:flutter/material.dart';
+import 'package:football_news/screens/newslist_form.dart'; // Import the form page
 import 'package:football_news/widgets/left_drawer.dart';
 import 'package:football_news/widgets/news_card.dart';
 
 class MyHomePage extends StatelessWidget {
-    MyHomePage({super.key});
+  MyHomePage({super.key});
 
-    final String nama = "Priyanggara Zuhaynanda Zavana"; //nama
-    final String npm = "2406359241"; //npm
-    final String kelas = "F"; //kelas
+  final String nama = "Priyanggara Zuhaynanda Zavana"; //nama
+  final String npm = "2406359241"; //npm
+  final String kelas = "F"; //kelas
 
-    @override
-    Widget build(BuildContext context) {
+  final List<ItemHomepage> items = [
+    ItemHomepage("See Football News", Icons.newspaper),
+    ItemHomepage("Add News", Icons.add),
+    ItemHomepage("Logout", Icons.logout),
+  ];
+
+
+  @override
+  Widget build(BuildContext context) {
     // Scaffold menyediakan struktur dasar halaman dengan AppBar dan body.
     return Scaffold(
-      // AppBar adalah bagian atas halaman yang menampilkan judul.
       appBar: AppBar(
         // Judul aplikasi "Football News" dengan teks putih dan tebal.
         title: const Text(
@@ -26,8 +33,7 @@ class MyHomePage extends StatelessWidget {
         // Warna latar belakang AppBar diambil dari skema warna tema aplikasi.
         backgroundColor: Theme.of(context).colorScheme.primary,
       ),
-
-      drawer: const LeftDrawer(),
+      drawer: LeftDrawer(),
       // Body halaman dengan padding di sekelilingnya.
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -88,13 +94,7 @@ class MyHomePage extends StatelessWidget {
         ),
       ),
     );
-    }
-
-    final List<ItemHomepage> items = [
-    ItemHomepage("See Football News", Icons.newspaper),
-    ItemHomepage("Add News", Icons.add),
-    ItemHomepage("Logout", Icons.logout),
-  ];
+  }
 }
 
 class InfoCard extends StatelessWidget {
@@ -129,11 +129,3 @@ class InfoCard extends StatelessWidget {
     );
   }
 }
-
-class ItemHomepage {
- final String name;
- final IconData icon;
-
- ItemHomepage(this.name, this.icon);
-}
-

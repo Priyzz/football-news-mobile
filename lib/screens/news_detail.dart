@@ -8,8 +8,8 @@ class NewsDetailPage extends StatelessWidget {
 
   String _formatDate(DateTime date) {
     // Simple date formatter without intl package
-    final months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 
-                    'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+    final months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
+      'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
     return '${date.day} ${months[date.month - 1]} ${date.year}, ${date.hour.toString().padLeft(2, '0')}:${date.minute.toString().padLeft(2, '0')}';
   }
 
@@ -26,9 +26,9 @@ class NewsDetailPage extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             // Thumbnail image
-            if (news.thumbnail.isNotEmpty)
+            if (news.thumbnail != null && news.thumbnail!.isNotEmpty)
               Image.network(
-                'http://localhost:8000/proxy-image/?url=${Uri.encodeComponent(news.thumbnail)}',
+                'http://localhost:8000/proxy-image/?url=${Uri.encodeComponent(news.thumbnail!)}',
                 width: double.infinity,
                 height: 250,
                 fit: BoxFit.cover,
@@ -40,7 +40,7 @@ class NewsDetailPage extends StatelessWidget {
                   ),
                 ),
               ),
-            
+
             Padding(
               padding: const EdgeInsets.all(16.0),
               child: Column(
@@ -67,7 +67,7 @@ class NewsDetailPage extends StatelessWidget {
 
                   // Title
                   Text(
-                    news.title,
+                    news.title ?? 'Tidak Ada Judul',
                     style: const TextStyle(
                       fontSize: 24.0,
                       fontWeight: FontWeight.bold,
@@ -86,7 +86,7 @@ class NewsDetailPage extends StatelessWidget {
                           borderRadius: BorderRadius.circular(12.0),
                         ),
                         child: Text(
-                          news.category.toUpperCase(),
+                          (news.category ?? 'NO CATEGORY').toUpperCase(),
                           style: TextStyle(
                             fontSize: 12,
                             fontWeight: FontWeight.bold,
@@ -96,7 +96,9 @@ class NewsDetailPage extends StatelessWidget {
                       ),
                       const SizedBox(width: 12),
                       Text(
-                        _formatDate(news.createdAt),
+                        (news.createdAt != null)
+                            ? _formatDate(news.createdAt!)
+                            : 'Tanggal tidak diketahui',
                         style: TextStyle(
                           fontSize: 12,
                           color: Colors.grey[600],
@@ -112,7 +114,7 @@ class NewsDetailPage extends StatelessWidget {
                       Icon(Icons.visibility, size: 16, color: Colors.grey[600]),
                       const SizedBox(width: 4),
                       Text(
-                        '${news.newsViews} views',
+                        '${news.newsViews ?? 0} views',
                         style: TextStyle(
                           fontSize: 12,
                           color: Colors.grey[600],
@@ -120,12 +122,12 @@ class NewsDetailPage extends StatelessWidget {
                       ),
                     ],
                   ),
-                  
+
                   const Divider(height: 32),
 
                   // Full content
                   Text(
-                    news.content,
+                    news.content ?? 'Konten tidak tersedia.',
                     style: const TextStyle(
                       fontSize: 16.0,
                       height: 1.6,

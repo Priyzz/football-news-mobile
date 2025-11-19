@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:football_news/screens/menu.dart';
+import 'package:football_news/screens/login.dart';
 import 'package:pbp_django_auth/pbp_django_auth.dart';
 import 'package:provider/provider.dart';
 
@@ -36,10 +37,10 @@ class MyApp extends StatelessWidget {
           //
           // This works for code too, not just values: Most code changes can be
           // tested with just a hot reload.
-            colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.blue)
-          .copyWith(secondary: Colors.blueAccent[400]),
+          colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.blue)
+              .copyWith(secondary: Colors.blueAccent[400]),
         ),
-        home: MyHomePage(),
+          home: const LoginPage(),
       ),
     );
   }
